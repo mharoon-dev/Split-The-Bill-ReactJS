@@ -4,34 +4,25 @@ import Friends from "./Components/Friends/Friends.jsx";
 import SplitABill from "./Components/SplitABill/SplitABill.jsx";
 
 function App() {
+  const [ selected, setSelected ] = useState(false)
+  const [friends, setFriends] = useState([
+    {
+      name: "Ali",
+      img: "  https://picsum.photos/200",
+      totalExpense: "",
+      frndExpense: "",
+      myExpense: "",
+      id: Date.now(),
+    },
 
-    const [friends, setFriends] = useState([
-        {
-            name: "Ali",
-            img: "https://picsum.photos/200",
-            bill: 200,
-            selected: false
-        },
-        {
-            name: "Ahmed",
-            img: "https://picsum.photos/200",
-            bill: 300,
-            selected: false
-        },
-        {
-            name: "Asad",
-            img: "https://picsum.photos/200",
-            bill: 400,
-            selected: false
-        },
-    ]);
+  ]);
   return (
     <div className="container">
-      <div className="row">
-        <Friends friends={friends} setFriends={setFriends} />
+      <div className="row " style={{ height: "100vh" }}>
+        <Friends friends={friends} setFriends={setFriends} selected={selected} setSelected={setSelected} />
+        <SplitABill friends={friends} setFriends={setFriends} selected={selected} setSelected={setSelected} />
       </div>
       {/* <AddFriend /> */}
-      <SplitABill />
     </div>
   );
 }

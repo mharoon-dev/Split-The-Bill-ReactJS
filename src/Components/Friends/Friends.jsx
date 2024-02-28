@@ -1,14 +1,25 @@
+import { useEffect, useState } from "react";
 import AddFriend from "../AddFriend/AddFriend.jsx";
 import "./Friends.css";
 
-export default function Friends({ friends, setFriends }) {
+export default function Friends({
+  friends,
+  setFriends,
+  selected,
+  setSelected,
+}) {
   return (
-    <div className="col-md-4  p-1" style={{ border: "1px solid black" }}>
+    <div className="col-md-5 p-1"
+    style={{
+      margin: "auto",
+      height: "50%"
+    }}>
       {/* friends list  */}
       <div>
         {friends?.map((friend) => {
           return (
-            <div className="frndDiv mt-2 p-md-2 d-flex justify-content-between align-items-center w-100 ">
+            <div className="frndDiv mt-2 p-md-2 d-flex justify-content-between align-items-center w-100 "
+>
               <div className="d-flex justify-content-between align-items-center">
                 <img
                   className="card-title m-0 frndImg "
@@ -18,11 +29,34 @@ export default function Friends({ friends, setFriends }) {
                     width: "50px",
                   }}
                 />
-                <h5 className="card-text ms-1 frndName">{friend.name}</h5>
+
+                <div className="d-flex flex-column">
+                  <h5
+                    style={{ display: "block" }}
+                    className="card-text ms-1 frndName"
+                  >
+                    {friend.name}
+                  </h5>
+
+                  <p className="ms-1" style={{fontSize:'12px'}}>
+                    {friend?.whoPayed?.toLowerCase() === "you"
+                      ? `${friend.name} has pay ${friend.frndExpense}`
+                      : friend?.whoPayed?.toLowerCase() === "friend"
+                      ? `I have to pay ${friend.myExpense}`
+                      : ""}
+                  </p>
+                </div>
               </div>
 
+              {/* select button */}
               <div>
-                <a href="#" className="btn btn-primary selectBtn">
+                <a
+                  onClick={() => {
+                    setSelected(friend.id);
+                  }}
+                  href="#"
+                  className="btn btn-primary selectBtn"
+                >
                   Select
                 </a>
               </div>
@@ -32,12 +66,10 @@ export default function Friends({ friends, setFriends }) {
 
         {/* add friend div */}
 
-            <AddFriend />
-
-
+        <AddFriend friends={friends} setFriends={setFriends} />
 
         {/* add friend button */}
-        <div className="mt-2 p-md-2 d-flex justify-content-between align-items-center w-100">
+        <div className="mt-2 p-md-2 d-flex justify-content-center align-items-center w-100">
           <a
             href="#"
             onClick={() => {
@@ -45,7 +77,7 @@ export default function Friends({ friends, setFriends }) {
                 (document.querySelector(".AddFrend").style.display = "none")
               );
             }}
-            className="btn btn-primary selectBtn AddFrend ms-auto"
+            className="btn btn-primary selectBtn AddFrend "
           >
             Add Friend
           </a>
