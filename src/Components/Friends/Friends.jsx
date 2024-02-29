@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import AddFriend from "../AddFriend/AddFriend.jsx";
 import "./Friends.css";
 
@@ -9,17 +8,18 @@ export default function Friends({
   setSelected,
 }) {
   return (
-    <div className="col-md-5 p-1"
-    style={{
-      margin: "auto",
-      height: "50%"
-    }}>
+    <div
+      className="col-md-5 p-1 d-flex justify-content-center align-items-center"
+      style={{
+        margin: "auto",
+        height: "50%",
+      }}
+    >
       {/* friends list  */}
-      <div>
+      <div className="w-100">
         {friends?.map((friend) => {
           return (
-            <div className="frndDiv mt-2 p-md-2 d-flex justify-content-between align-items-center w-100 "
->
+            <div className="frndDiv mt-2 p-md-2 d-flex justify-content-between align-items-center w-100 ">
               <div className="d-flex justify-content-between align-items-center">
                 <img
                   className="card-title m-0 frndImg "
@@ -38,9 +38,18 @@ export default function Friends({
                     {friend.name}
                   </h5>
 
-                  <p className="ms-1" style={{fontSize:'12px'}}>
+                  <p
+                    className="ms-1"
+                    style={{
+                      fontSize: "12px",
+                      color:
+                        friend?.whoPayed?.toLowerCase() === "you"
+                          ? "green"
+                          : "red",
+                    }}
+                  >
                     {friend?.whoPayed?.toLowerCase() === "you"
-                      ? `${friend.name} has pay ${friend.frndExpense}`
+                      ? `${friend.name} has to pay ${friend.frndExpense}`
                       : friend?.whoPayed?.toLowerCase() === "friend"
                       ? `I have to pay ${friend.myExpense}`
                       : ""}
@@ -74,10 +83,10 @@ export default function Friends({
             href="#"
             onClick={() => {
               (document.querySelector(".addFrndDiv").style.display = "block")(
-                (document.querySelector(".AddFrend").style.display = "none")
+                (document.querySelector(".addFrend").style.display = "none")
               );
             }}
-            className="btn btn-primary selectBtn AddFrend "
+            className="btn btn-primary selectBtn addFrend "
           >
             Add Friend
           </a>

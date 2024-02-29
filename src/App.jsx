@@ -14,7 +14,6 @@ function App() {
       myExpense: "",
       id: Date.now(),
     },
-
   ]);
   return (
     <div className="container">

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./AddFriend.css";
 
 export default function AddFriend({ friends, setFriends }) {
   const [FriendName, setFriendName] = useState("");
@@ -9,10 +10,9 @@ export default function AddFriend({ friends, setFriends }) {
     let myFriends = [...friends];
     console.log(myFriends);
     if (!FriendName || !FriendImg) {
-      // alert 
+      // alert
       alert("Please Enter Friend Name and Image!");
     } else {
-
       // add friend obj in array
       myFriends.push({
         name: FriendName,
@@ -24,13 +24,12 @@ export default function AddFriend({ friends, setFriends }) {
         id: Date.now(),
       });
 
-      // addFriend in to the list 
+      // addFriend in to the list
       setFriends(myFriends);
 
       // clear input field
-      setFriendName("");
-      setFriendImg("");
-
+      document.getElementById("nameInput").value = "";
+      document.getElementById("imgInput").value = "";
     }
   };
   return (
@@ -58,6 +57,7 @@ export default function AddFriend({ friends, setFriends }) {
             onChange={(e) => setFriendName(e.target.value)}
             type="text"
             className="form-control frndInput"
+            id="nameInput"
             aria-label="Sizing example input"
             aria-describedby="inputGroup-sizing-default"
           />
@@ -78,7 +78,8 @@ export default function AddFriend({ friends, setFriends }) {
           <input
             onChange={(e) => setFriendImg(e.target.value)}
             type="text"
-            className="form-control frndImg"
+            className="form-control frndInput"
+            id="imgInput"
             aria-label="Sizing example input"
             aria-describedby="inputGroup-sizing-default"
           />
@@ -87,7 +88,14 @@ export default function AddFriend({ friends, setFriends }) {
         {/* buttons divs */}
         <div className="mt-2  d-flex justify-content-around align-items-center w-100">
           <a
-          onClick={() => addFriend()}
+            onClick={() => {
+              // calling addFriend function
+              addFriend();
+
+              // changing display
+              document.querySelector(".addFrndDiv").style.display = "none";
+              document.querySelector(".addFrend").style.display = "block";
+            }}
             href="#"
             className="btn btn-primary selectBtn mx-auto"
             style={{
@@ -107,7 +115,7 @@ export default function AddFriend({ friends, setFriends }) {
             }}
             onClick={() => {
               (document.querySelector(".addFrndDiv").style.display = "none")(
-                (document.querySelector(".AddFrend").style.display = "block")
+                (document.querySelector(".addFrend").style.display = "block")
               );
             }}
           >
